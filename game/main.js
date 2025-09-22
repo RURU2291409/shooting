@@ -25,7 +25,6 @@ function tryShoot(){
 }
 
 
-let tama = 0;  
 window.addEventListener("keydown", (e) => {
     if (e.key === "ArrowLeft") {
         if(player.x > 10) {
