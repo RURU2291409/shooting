@@ -1,21 +1,22 @@
-import{ player , initPlayer , drawPlayer } from "./player.js";
-import { spawnEnemy , enemies } from "./enemies.js";
+
+import { player, initPlayer, drawPlayer } from "./player.js";
+import { spawnEnemy, enemies, updateEnemies, drawEnemies } from "./enemies.js";
+import { handleCollisions } from "./collision.js";
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 initPlayer(canvas);
-spawnEnemy(canvas);
 
-const bullets = [];
+export const bullets = [];
 const BULLET_SPEED = -30;
 
-function tryShoot(){
+function tryShoot() {
     bullets.push({
         x: player.x,
         y: player.y,
-        width: 4,
-        height: 50,
+        width: 5,
+        height: 30,
         vy: BULLET_SPEED,
     })
 }
@@ -23,7 +24,7 @@ function tryShoot(){
 
 window.addEventListener("keydown", (e) => {
     if (e.key === "ArrowLeft") {
-        if(player.x > 10) {
+        if (player.x > 10) {
             player.x -= 10;
         }
     } else if (e.key === "ArrowRight") {
@@ -31,7 +32,7 @@ window.addEventListener("keydown", (e) => {
             player.x += 10;
         }
     } else if (e.code === "Space") {
-    tryShoot();
+        tryShoot();
     }
 });
 
@@ -39,29 +40,28 @@ function update() {
     for (let i = 0; i < bullets.length; i++) {
         const bullet = bullets[i];
         bullet.y += bullet.vy;
-        if(bullet.y < 0) {
+        if (bullet.y < 0) {
             bullets.splice(i, 1);
         }
     }
+    spawnEnemy(canvas);
+    updateEnemies(canvas);
+    handleCollisions();
 }
 
-function draw(){
+function draw() {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     drawPlayer(ctx);
 
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "silver";
     for (let i = 0; i < bullets.length; i++) {
         const bullet = bullets[i];
         ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
     }
 
-    ctx.fillStyle = "red";
-    for (let i = 0; i < enemies.length; i++) {
-        const enemy = enemies[i];
-        ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
-    }
+drawEnemies(ctx);
 }
 
 function gameLoop() {
@@ -71,3 +71,4 @@ function gameLoop() {
 }
 
 gameLoop();
+

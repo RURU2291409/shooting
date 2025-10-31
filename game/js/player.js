@@ -2,7 +2,7 @@ export const player = {
     x: 0,
     y: 0,
     width: 30,
-    hight: 30,
+    height: 30,
     color: "cyan",
     life: 3,
 };
