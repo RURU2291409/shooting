@@ -9,18 +9,24 @@ const ctx = canvas.getContext("2d");
 initPlayer(canvas);
 
 export const bullets = [];
-const BULLET_SPEED = -30;
+const BULLET_SPEED = -40;
 
 function tryShoot() {
     bullets.push({
         x: player.x,
         y: player.y,
         width: 5,
-        height: 30,
+        height: 70,
         vy: BULLET_SPEED,
     })
 }
 
+function updateScore() {
+    const scoreBoard = document.getElementById("scoreBoard");
+    scoreBoard.innerText = `Score: ${player.score}`;
+    const lifeBoard = document.getElementById("lifeBoard");
+    lifeBoard.innerText = `Life: ${player.life}`;
+}
 
 window.addEventListener("keydown", (e) => {
     if (e.key === "ArrowLeft") {
@@ -47,6 +53,7 @@ function update() {
     spawnEnemy(canvas);
     updateEnemies(canvas);
     handleCollisions();
+    updateScore();
 }
 
 function draw() {
