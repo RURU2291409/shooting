@@ -14,13 +14,13 @@ function pushEnemies(canvas) {
 }
 
 export function spawnEnemy(canvas) {
-  if (enemies.length < 5) {
+ if (enemies.length < 10) {
     pushEnemies(canvas);
  }
 }
 
 export function updateEnemies(canvas) {
-    for (let i = enemies.length - 1; i >= 0; i--) {
+  for (let i = enemies.length - 1; i >= 0; i--) {
     const e = enemies[i];
     e.y += e.vy;
     if (e.y > canvas.height) {
@@ -30,8 +30,7 @@ export function updateEnemies(canvas) {
 }
 
 export function drawEnemies(ctx) {
-  ctx.fillStyle = "crimson";
   for (const e of enemies) {
-    ctx.fillRect(enemyImage, e.x, e.y, e.width, e.height);
+     ctx.drawImage(enemyImage, e.x, e.y, e.width, e.height);
   }
 }

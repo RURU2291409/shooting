@@ -35,22 +35,21 @@ export function handleCollisions() {
       { x: e.x, y: e.y, width: e.width, height: e.height }
     )) {
       player.life -= 1;
-      if(player.life <= 0) {
+      if (player.life <= 0) {
         document.location.reload();
       }
       enemies.splice(ei, 1);
-      console.log("Life:", player.life);
-    //  isGameOver = true;
+      console.log("Player Life:", player.life);
       break;
     }
   }
 }
 
 function rectsIntersect(a, b) {
-    return (
-        a.x < b.x + b.width &&
-        a.x + a.width > b.x &&
-        a.y < b.y + b.height &&
-        a.y + a.height > b.y
-    );
+  return (
+    a.x < b.x + b.width &&
+    a.x + a.width > b.x &&
+    a.y < b.y + b.height &&
+    a.y + a.height > b.y
+  );
 }
