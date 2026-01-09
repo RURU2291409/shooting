@@ -20,8 +20,33 @@ function tryShoot() {
         width: 10,
         height: 70,
         vy: BULLET_SPEED,
+    },{
+        x: player.x + player.width / 2 - 5,
+        y: player.y,
+        width: 10,
+        height: 70,
+        vy: BULLET_SPEED,
+    },{
+        x: player.x + player.width / 2 - 5,
+        y: player.y,
+        width: 10,
+        height: 70,
+        vy: BULLET_SPEED,
+    },{
+        x: player.x + player.width / 2 - 5,
+        y: player.y,
+        width: 10,
+        height: 70,
+        vy: BULLET_SPEED,
+    },{
+        x: player.x + player.width / 2 - 5,
+        y: player.y,
+        width: 10,
+        height: 70,
+        vy: BULLET_SPEED,
     })
 }
+
 
 function updateScore() {
     const scoreBoard = document.getElementById("scoreBoard");
@@ -39,6 +64,17 @@ window.addEventListener("keydown", (e) => {
         if (player.x < canvas.width - player.width - 10) {
             player.x += 10;
         }
+
+    } else if (e.key === "ArrowUp") {
+        if (player.y > 10) {
+            player.y -= 10;
+        }
+
+    } else if (e.key === "ArrowDown") {
+        if (player.y < canvas.height - player.height - 10) {
+            player.y += 10;
+        }
+
     } else if (e.code === "Space") {
         tryShoot();
     }
